@@ -170,6 +170,9 @@ section { padding-block: clamp(72px, 9vw, 124px); position: relative; }
 .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+/* Mobile dropdown is hidden by default; only revealed as a slide-in panel on small screens */
+.mobile-menu { display: none; }
+
 /* ---------- Hero ---------- */
 .hero { padding-top: clamp(56px, 8vw, 104px); padding-bottom: clamp(60px, 8vw, 110px); position: relative; overflow: hidden; }
 .hero::before {
@@ -540,6 +543,7 @@ section { padding-block: clamp(72px, 9vw, 124px); position: relative; }
   .nav-links, .nav-actions .btn { display: none; }
   .nav-toggle { display: flex; }
   .mobile-menu {
+    display: block;
     position: fixed; inset: 76px 0 auto 0; background: #fff; border-bottom: 1px solid var(--line);
     box-shadow: var(--shadow); padding: 16px var(--gutter) 26px; transform: translateY(-120%);
     transition: transform .4s var(--ease); z-index: 99; max-height: calc(100vh - 76px); overflow-y: auto;
