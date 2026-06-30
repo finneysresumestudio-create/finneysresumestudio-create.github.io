@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://finneysresumestudio-create.github.io/sitemap.xml

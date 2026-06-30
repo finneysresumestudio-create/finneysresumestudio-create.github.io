@@ -1,0 +1,9 @@
+# Local source material provided by the client — kept on disk, not published
+Data/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+*.tmp
