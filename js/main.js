@@ -37,32 +37,6 @@
     });
   }
 
-  /* ---------- Pricing toggle ---------- */
-  const pkgTabs = $$(".pricing-toggle button");
-  const gridStandard = $("#grid-standard");
-  const gridFull = $("#grid-full");
-  const pkgNote = $("#pkgNote");
-  const NOTES = {
-    standard:
-      "<strong>Standard</strong> — the core resume rewrite, ATS keyword check, cover letter template &amp; one revision round.",
-    full:
-      "<strong>Full</strong> — everything in Standard, plus LinkedIn profile optimization &amp; a 30-minute strategy call.",
-  };
-  pkgTabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      const pkg = tab.dataset.pkg;
-      pkgTabs.forEach((t) => {
-        const active = t === tab;
-        t.classList.toggle("active", active);
-        t.setAttribute("aria-selected", String(active));
-      });
-      const isFull = pkg === "full";
-      if (gridStandard) gridStandard.hidden = isFull;
-      if (gridFull) gridFull.hidden = !isFull;
-      if (pkgNote) pkgNote.innerHTML = NOTES[pkg];
-    });
-  });
-
   /* ---------- Transformations switcher ---------- */
   const TRANSFORMS = [
     { name: "Emily Carter",   role: "Executive Sales Leader · Sales Management",       slug: "emily-carter" },

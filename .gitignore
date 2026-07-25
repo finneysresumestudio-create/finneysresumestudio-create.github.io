@@ -1,5 +1,7 @@
 # Local source material provided by the client — kept on disk, not published
 Data/
+Edits to site*.pdf
+Edits to site*.docx
 
 # OS / editor cruft
 .DS_Store

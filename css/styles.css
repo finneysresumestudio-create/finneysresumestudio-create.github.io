@@ -260,20 +260,13 @@ section { padding-block: clamp(72px, 9vw, 124px); position: relative; }
 .feature-list li svg { flex-shrink: 0; width: 20px; height: 20px; color: var(--royal); margin-top: 2px; }
 
 /* ---------- Pricing ---------- */
-.pricing-toggle {
-  display: inline-flex; align-items: center; gap: 4px; padding: 5px;
-  background: var(--paper-3); border-radius: 100px; margin: 0 auto 14px; border: 1px solid var(--line);
+.toggle-note {
+  text-align: center; color: var(--muted); font-size: 0.95rem;
+  margin: 0 auto 46px; max-width: 720px;
 }
-.pricing-toggle button {
-  padding: 11px 26px; border-radius: 100px; font-weight: 600; font-size: 0.95rem; color: var(--muted);
-  transition: all .3s var(--ease); position: relative;
-}
-.pricing-toggle button.active { background: var(--navy); color: #fff; box-shadow: var(--shadow-sm); }
-.toggle-note { text-align: center; color: var(--muted); font-size: 0.9rem; margin-bottom: 46px; }
 .toggle-note strong { color: var(--royal); }
 
 .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
-.pricing-grid[hidden] { display: none; }
 .price-card {
   background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
   padding: 34px 30px; display: flex; flex-direction: column; position: relative;
@@ -572,6 +565,5 @@ section { padding-block: clamp(72px, 9vw, 124px); position: relative; }
   .hero-badge { display: none; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-brand { grid-column: auto; }
-  .pricing-toggle button { padding: 10px 18px; font-size: 0.88rem; }
   .timeline { grid-template-columns: 1fr; }
 }

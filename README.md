@@ -23,10 +23,10 @@ stories, the get-started flow, Laura's bio, and a full FAQ.
 ├── css/
 │   └── styles.css    # Design system + all component styles
 ├── js/
-│   └── main.js       # Nav, pricing toggle, before/after switcher, lightbox, FAQ, reveals
+│   └── main.js       # Nav, before/after switcher, lightbox, FAQ, reveals
 ├── assets/
-│   ├── img/          # Logo, headshot, favicon, pricing, transformations, templates
-│   └── docs/         # Services Agreement (.docx) + Cover Letter Anatomy (PDF)
+│   ├── img/          # Logo, headshot, favicon, transformations, templates
+│   └── docs/         # Services Agreement (PDF) + Cover Letter Anatomy (PDF)
 ├── Data/             # Original source materials provided by the client
 └── .nojekyll         # Serve all asset paths verbatim on GitHub Pages
 ```
@@ -35,7 +35,7 @@ stories, the get-started flow, Laura's bio, and a full FAQ.
 
 1. **Hero** — brand promise + live before/after preview
 2. **Services** — Resume Transformation & LinkedIn Transformation
-3. **Pricing** — Standard vs. Full packages, three career tiers each (toggle)
+3. **Pricing** — three career tiers (Entry, Mid-career, Executive), all-inclusive
 4. **Transformations** — interactive before/after gallery with lightbox
 5. **Client Stories** — testimonials
 6. **Start Your Project** — sign the agreement, pick a template, complete the Story Builder Profile, 30-day timeline
@@ -46,8 +46,9 @@ stories, the get-started flow, Laura's bio, and a full FAQ.
 
 | What to change | Where |
 | --- | --- |
-| Prices / package features | `index.html` → `#pricing` (two grids: `#grid-standard`, `#grid-full`) |
-| Contact email | search `finneyresumestudio@gmail.com` across `index.html` & `agreement.html` |
+| Prices / tier features | `index.html` → `#pricing` → `.pricing-grid` |
+| Services Agreement | edit `agreement.html`, then re-export `assets/docs/finneys-resume-studio-services-agreement.pdf` (browser → Print → Save as PDF) |
+| Contact email | search `finneysresumestudio@gmail.com` across `index.html` & `agreement.html` |
 | Testimonials | `index.html` → `#stories` |
 | FAQ answers | `index.html` → `#faq` |
 | Brand colors | `css/styles.css` → `:root` tokens |
