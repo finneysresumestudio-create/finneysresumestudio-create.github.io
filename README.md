@@ -1,6 +1,6 @@
-# Finney's Resume Studio — Website
+# Finney's Resume Studio Website
 
-The official website for **Finney's Resume Studio** (Laura Finney) — professional resume writing,
+The official website for **Finney's Resume Studio** (Laura Finney): professional resume writing,
 ATS-compatible rewrites, cover letter templates, and LinkedIn profile optimization.
 
 > *Crafted careers. Elevated stories.*
@@ -10,7 +10,7 @@ ATS-compatible rewrites, cover letter templates, and LinkedIn profile optimizati
 ## About
 
 A fast, fully static, single-page marketing site built with plain HTML, CSS, and vanilla
-JavaScript — no build step, no dependencies, hosted on GitHub Pages. It covers everything a
+JavaScript, with no build step and no dependencies, hosted on GitHub Pages. It covers everything a
 prospective client needs: services, pricing, real before-and-after transformations, client
 stories, the get-started flow, Laura's bio, and a full FAQ.
 
@@ -33,14 +33,14 @@ stories, the get-started flow, Laura's bio, and a full FAQ.
 
 ## Sections
 
-1. **Hero** — brand promise + live before/after preview
-2. **Services** — Resume Transformation & LinkedIn Transformation
-3. **Pricing** — three career tiers (Entry, Mid-career, Executive), all-inclusive
-4. **Transformations** — interactive before/after gallery with lightbox
-5. **Client Stories** — testimonials
-6. **Start Your Project** — sign the agreement, pick a template, complete the Story Builder Profile, 30-day timeline
-7. **About Laura** — bio, credentials, experience
-8. **FAQ** — categorized, accordion
+1. **Hero**: brand promise + live before/after preview
+2. **Services**: Resume Transformation and LinkedIn Transformation
+3. **Pricing**: three career tiers (Entry, Mid-career, Executive), all-inclusive
+4. **Transformations**: interactive before/after gallery with lightbox
+5. **Client Stories**: testimonials
+6. **Start Your Project**: sign the agreement, pick a template, complete the Story Builder Profile, 30-day timeline
+7. **About Laura**: bio, credentials, experience
+8. **FAQ**: categorized, accordion
 
 ## Editing common content
 
@@ -56,7 +56,7 @@ stories, the get-started flow, Laura's bio, and a full FAQ.
 
 ## Local preview
 
-It's a static site — just open `index.html` in a browser, or serve the folder:
+It's a static site, so just open `index.html` in a browser, or serve the folder:
 
 ```bash
 python -m http.server 8080   # then visit http://localhost:8080

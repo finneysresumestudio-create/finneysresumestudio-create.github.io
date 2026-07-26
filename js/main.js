@@ -1,5 +1,5 @@
 /* =====================================================================
-   Finney's Resume Studio — interactions
+   Finney's Resume Studio interactions
    ===================================================================== */
 (function () {
   "use strict";
@@ -55,9 +55,9 @@
     const t = TRANSFORMS[i];
     if (!t || !baBefore) return;
     baBefore.src = `assets/img/transformations/${t.slug}-before.jpg`;
-    baBefore.alt = `${t.name}'s resume before — the original document`;
+    baBefore.alt = `${t.name}'s resume before: the original document`;
     baAfter.src  = `assets/img/transformations/${t.slug}-after.jpg`;
-    baAfter.alt  = `${t.name}'s resume after — a clean, professionally designed layout`;
+    baAfter.alt  = `${t.name}'s resume after: a clean, professionally designed layout`;
     baName.textContent = t.name;
     baRole.textContent = t.role;
     baBtns.forEach((b, j) => {
@@ -82,7 +82,7 @@
     tGrid.innerHTML = TEMPLATES.map((slug) => {
       const name = titleCase(slug);
       return `
-      <figure class="template-item" data-lightbox data-src="assets/img/templates/${slug}.jpg" data-cap="${name} — template sample" role="button" tabindex="0" aria-label="View the ${name} template sample">
+      <figure class="template-item" data-lightbox data-src="assets/img/templates/${slug}.jpg" data-cap="${name} template sample" role="button" tabindex="0" aria-label="View the ${name} template sample">
         <img src="assets/img/templates/${slug}.jpg" alt="${name} resume template sample" loading="lazy" />
         <figcaption class="t-name">
           <b>${name}</b>
