@@ -52,6 +52,7 @@ stories, the get-started flow, Laura's bio, and a full FAQ.
 | Testimonials | `index.html` → `#stories` |
 | FAQ answers | `index.html` → `#faq` |
 | Brand colors | `css/styles.css` → `:root` tokens |
+| Link-share thumbnail | edit `_ogcard.html`, re-screenshot it at 1200x630 to `assets/img/og-card.png`, then re-scrape the URL in each platform's debugger |
 | Transformations / templates | replace images in `assets/img/` and update arrays in `js/main.js` |
 
 ## Local preview
