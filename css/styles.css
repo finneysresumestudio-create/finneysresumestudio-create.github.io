@@ -282,11 +282,10 @@ section { padding-block: clamp(72px, 9vw, 124px); position: relative; }
 .price-tier { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--royal); }
 .price-card h3 { margin: 8px 0 2px; font-size: 1.5rem; }
 .price-exp { font-size: 0.9rem; color: var(--muted); margin-bottom: 22px; }
-.price-amt { display: flex; align-items: baseline; gap: 4px; margin-bottom: 4px; }
+.price-amt { display: flex; align-items: baseline; gap: 4px; margin-bottom: 26px; }
 .price-amt .cur { font-family: var(--serif); font-size: 1.4rem; color: var(--navy); font-weight: 600; align-self: flex-start; margin-top: 6px; }
 .price-amt .num { font-family: var(--serif); font-size: 3.1rem; font-weight: 600; color: var(--navy); line-height: 1; letter-spacing: -0.02em; }
 .price-amt .per { font-size: 0.92rem; color: var(--muted); }
-.price-student { font-size: 0.82rem; color: var(--royal); font-weight: 600; min-height: 20px; margin-bottom: 22px; }
 .price-card .divider { height: 1px; background: var(--line); margin-bottom: 20px; }
 .price-features { flex: 1; margin-bottom: 26px; }
 .price-features li { display: flex; gap: 11px; padding: 7px 0; font-size: 0.94rem; align-items: flex-start; }
