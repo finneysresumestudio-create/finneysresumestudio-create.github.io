@@ -163,6 +163,35 @@
     { passive: true }
   );
 
+  /* ---------- Copy email address ---------- */
+  const copyBtn = $("#copyEmail");
+  if (copyBtn) {
+    const originalHTML = copyBtn.innerHTML;
+    let resetT;
+    copyBtn.addEventListener("click", async () => {
+      const email = copyBtn.dataset.email;
+      let ok = false;
+      try {
+        await navigator.clipboard.writeText(email);
+        ok = true;
+      } catch (err) {
+        // Fallback for browsers/contexts without the async clipboard API
+        const ta = document.createElement("textarea");
+        ta.value = email;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
+        ta.remove();
+      }
+      copyBtn.textContent = ok ? "Copied!" : "Copy failed";
+      clearTimeout(resetT);
+      resetT = setTimeout(() => { copyBtn.innerHTML = originalHTML; }, 2000);
+    });
+  }
+
   /* ---------- Lightbox ---------- */
   const lightbox = $("#lightbox");
   const lbImg = $("#lbImg");
@@ -245,7 +274,7 @@
   }
 
   /* ---------- Active nav link on scroll ---------- */
-  const sections = ["services", "pricing", "transformations", "stories", "start", "about", "faq"]
+  const sections = ["services", "pricing", "transformations", "stories", "start", "about", "faq", "contact"]
     .map((id) => document.getElementById(id))
     .filter(Boolean);
   const navMap = {};
