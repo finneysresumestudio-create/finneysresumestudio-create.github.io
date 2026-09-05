@@ -521,6 +521,29 @@ section { padding-block: clamp(72px, 9vw, 124px); position: relative; }
 .contact-facts svg { flex-shrink: 0; width: 19px; height: 19px; color: var(--royal); margin-top: 2px; }
 .contact-facts b { color: var(--ink); font-weight: 600; }
 
+/* ---------- Mailto fallback toast ---------- */
+.mail-toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 16px);
+  background: var(--navy-900); color: #cdd9ea; border-radius: 16px;
+  box-shadow: var(--shadow-lg); padding: 18px 56px 18px 22px;
+  z-index: 300; width: min(92vw, 600px);
+  opacity: 0; visibility: hidden;
+  transition: opacity .35s var(--ease), transform .35s var(--ease), visibility 0s linear .35s;
+}
+.mail-toast.show {
+  opacity: 1; visibility: visible; transform: translate(-50%, 0);
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+.mail-toast p { font-size: 0.92rem; margin-bottom: 12px; line-height: 1.5; }
+.mail-toast b { color: #fff; }
+.mail-toast-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.mail-toast-actions .btn { padding: 10px 18px; font-size: 0.88rem; }
+.mail-toast-close {
+  position: absolute; top: 10px; right: 10px; width: 34px; height: 34px;
+  border-radius: 50%; color: #9fb2cb; display: grid; place-items: center;
+}
+.mail-toast-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
 /* ---------- Final CTA ---------- */
 .cta-band { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-900) 100%); color: #fff; border-radius: 0; position: relative; overflow: hidden; }
 .cta-band::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 120% at 90% 10%, rgba(132,197,230,0.18), transparent 50%); }

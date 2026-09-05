@@ -163,34 +163,111 @@
     { passive: true }
   );
 
-  /* ---------- Copy email address ---------- */
-  const copyBtn = $("#copyEmail");
-  if (copyBtn) {
-    const originalHTML = copyBtn.innerHTML;
-    let resetT;
-    copyBtn.addEventListener("click", async () => {
-      const email = copyBtn.dataset.email;
+  /* ---------- Clipboard helper ---------- */
+  async function writeClipboard(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (err) {
+      // Fallback for browsers/contexts without the async clipboard API
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
       let ok = false;
-      try {
-        await navigator.clipboard.writeText(email);
-        ok = true;
-      } catch (err) {
-        // Fallback for browsers/contexts without the async clipboard API
-        const ta = document.createElement("textarea");
-        ta.value = email;
-        ta.setAttribute("readonly", "");
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.select();
-        try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
-        ta.remove();
-      }
-      copyBtn.textContent = ok ? "Copied!" : "Copy failed";
+      try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
+      ta.remove();
+      return ok;
+    }
+  }
+  function bindCopy(btn, getText) {
+    const originalHTML = btn.innerHTML;
+    let resetT;
+    btn.addEventListener("click", async () => {
+      const ok = await writeClipboard(getText());
+      btn.textContent = ok ? "Copied!" : "Copy failed";
       clearTimeout(resetT);
-      resetT = setTimeout(() => { copyBtn.innerHTML = originalHTML; }, 2000);
+      resetT = setTimeout(() => { btn.innerHTML = originalHTML; }, 2000);
     });
   }
+  const copyBtn = $("#copyEmail");
+  if (copyBtn) bindCopy(copyBtn, () => copyBtn.dataset.email);
+
+  /* ---------- Mailto fallback ----------
+     mailto: links silently do nothing on devices with no default email app
+     (typical for webmail users on desktop). Let the click proceed; if the
+     page still has focus shortly after (no mail app or chooser appeared),
+     offer Gmail-in-browser and copy-the-address alternatives. */
+  function parseMailto(href) {
+    const raw = href.slice(7);
+    const qIdx = raw.indexOf("?");
+    const to = decodeURIComponent(qIdx === -1 ? raw : raw.slice(0, qIdx));
+    let subject = "";
+    if (qIdx !== -1) {
+      subject = new URLSearchParams(raw.slice(qIdx + 1)).get("subject") || "";
+    }
+    return { to, subject };
+  }
+  function gmailComposeUrl(to, subject) {
+    let u = "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(to);
+    if (subject) u += "&su=" + encodeURIComponent(subject);
+    return u;
+  }
+
+  let mailToast = null;
+  let mailToastHideT = null;
+  function showMailFallback(to, subject) {
+    if (!mailToast) {
+      mailToast = document.createElement("div");
+      mailToast.className = "mail-toast";
+      mailToast.setAttribute("role", "status");
+      mailToast.innerHTML =
+        '<p><b>Didn\'t see an email window open?</b> No problem, reach Laura one of these ways instead.</p>' +
+        '<div class="mail-toast-actions">' +
+        '<a class="btn btn-accent" target="_blank" rel="noopener">Open in Gmail</a>' +
+        '<button class="btn btn-light" type="button">Copy address</button>' +
+        "</div>" +
+        '<button class="mail-toast-close" type="button" aria-label="Dismiss">' +
+        '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+        "</button>";
+      document.body.appendChild(mailToast);
+      bindCopy(mailToast.querySelector("button.btn-light"), () => mailToast.dataset.email);
+      mailToast.querySelector(".mail-toast-close").addEventListener("click", hideMailFallback);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") hideMailFallback();
+      });
+    }
+    mailToast.dataset.email = to;
+    mailToast.querySelector("a.btn-accent").href = gmailComposeUrl(to, subject);
+    mailToast.classList.add("show");
+    clearTimeout(mailToastHideT);
+    mailToastHideT = setTimeout(hideMailFallback, 15000);
+  }
+  function hideMailFallback() {
+    if (mailToast) mailToast.classList.remove("show");
+    clearTimeout(mailToastHideT);
+  }
+
+  let mailCheckT = null;
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest('a[href^="mailto:"]');
+    if (!link) return;
+    const { to, subject } = parseMailto(link.getAttribute("href"));
+    if (!to) return;
+    let left = false;
+    const onLeave = () => { left = true; };
+    window.addEventListener("blur", onLeave, { once: true });
+    document.addEventListener("visibilitychange", onLeave, { once: true });
+    clearTimeout(mailCheckT);
+    mailCheckT = setTimeout(() => {
+      window.removeEventListener("blur", onLeave);
+      document.removeEventListener("visibilitychange", onLeave);
+      if (!left && document.hasFocus()) showMailFallback(to, subject);
+    }, 1100);
+  });
 
   /* ---------- Lightbox ---------- */
   const lightbox = $("#lightbox");
